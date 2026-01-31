@@ -1,4 +1,5 @@
 # Qubit Force
+<img width="1890" height="855" alt="image" src="https://github.com/user-attachments/assets/d4924398-bb51-4b11-8a36-79825771f2dd" />
 
 A production-ready quantum-resilient secure communication platform demonstrating why classical ECC fails against quantum attacks and how hybrid cryptography (BB84 QKD + Post-Quantum Cryptography) provides future-proof security.
 
