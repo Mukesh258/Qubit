@@ -1,4 +1,4 @@
-# Quantum-Safe Secure Chat System
+# Qubit Force
 
 > **🔥 NEW: Now with Firebase/Firestore Integration!**  
 > This project has been migrated from PostgreSQL to Firebase Firestore for easier deployment and real-time capabilities.  
