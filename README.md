@@ -1,9 +1,5 @@
 # Qubit Force
 
-> **🔥 NEW: Now with Firebase/Firestore Integration!**  
-> This project has been migrated from PostgreSQL to Firebase Firestore for easier deployment and real-time capabilities.  
-> See [FIREBASE_SETUP_GUIDE.md](FIREBASE_SETUP_GUIDE.md) for setup instructions.
-
 A production-ready quantum-resilient secure communication platform demonstrating why classical ECC fails against quantum attacks and how hybrid cryptography (BB84 QKD + Post-Quantum Cryptography) provides future-proof security.
 
 ![Quantum-Safe Architecture](https://img.shields.io/badge/Security-Quantum--Safe-brightgreen)
