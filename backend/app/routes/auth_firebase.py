@@ -312,8 +312,8 @@ async def login(request: LoginRequest):
     state = secrets.token_urlsafe(32)
     client_id = os.getenv("GOOGLE_CLIENT_ID")
     
-    # Standard authorized redirect URI for the frontend to receive the code
-    redirect_uri = "http://localhost:5173/dashboard"
+    # Use dynamic redirect URI from frontend if provided, otherwise default
+    redirect_uri = request.redirect_uri or "http://localhost:5173/dashboard"
     
     scope = "openid email profile"
     

@@ -45,7 +45,8 @@ export default function Login() {
         setIsAnimating(true);
         setError(null);
         try {
-            const response = await authAPI.login();
+            const redirectUri = window.location.origin + '/dashboard';
+            const response = await authAPI.login(redirectUri);
             const { auth_url } = response.data;
             if (auth_url) {
                 // Perform the actual redirect to Google's account selection page
@@ -114,7 +115,7 @@ export default function Login() {
                         <span className="text-gradient"> security.</span>
                     </h1>
 
-                    
+
                 </div>
 
                 {/* Right side - Login card */}
@@ -216,7 +217,7 @@ export default function Login() {
                         <span>Continue with Google</span>
                     </button>
 
-                    
+
                 </div>
             </div>
         </div>

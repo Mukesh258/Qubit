@@ -69,14 +69,35 @@ app = FastAPI(
 )
 
 # CORS configuration for frontend
+import os
+import json
+
+origins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+]
+
+# Add production origins from environment
+cors_env = os.getenv("CORS_ORIGINS")
+if cors_env:
+    try:
+        # Check if it's a JSON list
+        if cors_env.startswith("["):
+            origins.extend(json.loads(cors_env))
+        else:
+            # Or a comma-separated string
+            origins.extend([o.strip() for o in cors_env.split(",")])
+    except Exception as e:
+        print(f"  [WARNING] Failed to parse CORS_ORIGINS: {e}")
+        origins.append(cors_env)
+
+# Also allow all Vercel subdomains if needed (optional, safer to be specific)
+origins.append("https://*.vercel.app")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",  # Vite dev server
-        "http://localhost:3000",  # Alternative dev port
-        "https://*.vercel.app",   # Vercel deployment
-        "*"  # For development - restrict in production
-    ],
+    allow_origins=origins,
+    allow_origin_regex="https://.*\.vercel\.app",  # Support for Vercel preview links
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
