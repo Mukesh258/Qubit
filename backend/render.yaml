@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: quantum-chat-backend
+    env: docker
+    plan: free
+    region: ohio
+    dockerContext: .
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: quantum-db
+          property: connectionString
+      - key: REDIS_URL
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+
+databases:
+  - name: quantum-db
+    plan: free
+    region: ohio

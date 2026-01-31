@@ -1,0 +1,27 @@
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+websockets==12.0
+python-multipart==0.0.6
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# Cryptography
+cryptography==41.0.7
+pycryptodome==3.19.0
+
+# Post-Quantum Cryptography (optional - will use simulation if not available)
+# pqcrypto==0.1.5
+
+# Firebase (for database and authentication)
+firebase-admin==6.4.0
+
+# OAuth
+authlib==1.2.1
+python-jose[cryptography]==3.3.0
+
+# Utilities
+python-dotenv==1.0.0
+
+# Quantum Simulation
+qiskit==0.45.1
+qiskit-aer==0.13.1
