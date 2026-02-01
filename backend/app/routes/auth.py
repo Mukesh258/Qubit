@@ -102,7 +102,7 @@ async def login(request: LoginRequest):
     
     # Standard authorized redirect URI for the frontend to receive the code
     # We use the frontend URL here because the frontend will handle the code and send it back to us
-    redirect_uri = "http://localhost:5173/dashboard" # Simplifying by going straight back to dashboard for the demo
+    redirect_uri = "https://qubit-nu.vercel.app/dashboard" # Simplifying by going straight back to dashboard for the demo
     
     scope = "openid email profile"
     
