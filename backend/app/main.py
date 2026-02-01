@@ -73,6 +73,7 @@ import os
 import json
 
 origins = [
+    "http://localhost:5173",
     "https://qubit-nu.vercel.app",
     "http://localhost:3000",
 ]

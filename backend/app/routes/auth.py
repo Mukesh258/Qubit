@@ -100,9 +100,9 @@ async def login(request: LoginRequest):
     state = secrets.token_urlsafe(32)
     client_id = os.getenv("GOOGLE_CLIENT_ID")
     
-    # Standard authorized redirect URI for the frontend to receive the code
-    # We use the frontend URL here because the frontend will handle the code and send it back to us
-    redirect_uri = "https://qubit-nu.vercel.app/dashboard" # Simplifying by going straight back to dashboard for the demo
+    # Use redirect_uri from request, or default to production URL
+    # In local development, frontend should pass "http://localhost:5173/dashboard"
+    redirect_uri = request.redirect_uri or "https://qubit-nu.vercel.app/dashboard"
     
     scope = "openid email profile"
     

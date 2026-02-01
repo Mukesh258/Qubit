@@ -312,7 +312,8 @@ async def login(request: LoginRequest):
     state = secrets.token_urlsafe(32)
     client_id = os.getenv("GOOGLE_CLIENT_ID")
     
-    # Use dynamic redirect URI from frontend if provided, otherwise default
+    # Use redirect_uri from request, or default to production URL
+    # In local development, frontend should pass "http://localhost:5173/dashboard"
     redirect_uri = request.redirect_uri or "https://qubit-nu.vercel.app/dashboard"
     
     scope = "openid email profile"
