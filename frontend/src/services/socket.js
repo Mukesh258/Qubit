@@ -1,21 +1,19 @@
 // Same-network real-time: when app is at http://localhost:5173/, WS uses same backend (localhost:8000)
 function getWebSocketUrl(sessionId) {
-    if (import.meta.env.VITE_WS_URL) {
-        const base = import.meta.env.VITE_WS_URL.replace(/^http/, 'ws').replace(/^https/, 'wss').replace(/\/?$/, '');
+    const wsUrlEnv = import.meta.env.VITE_WS_URL;
+    if (wsUrlEnv) {
+        const base = wsUrlEnv.replace(/^http/, 'ws').replace(/\/?$/, '');
         return `${base}/ws/chat/${sessionId}`;
     }
-    const apiUrl = import.meta.env.VITE_API_URL || '';
+
+    const apiUrl = import.meta.env.VITE_API_URL;
     if (apiUrl) {
         const protocol = apiUrl.startsWith('https') ? 'wss:' : 'ws:';
         const hostPort = apiUrl.replace(/^https?:\/\//, '').replace(/\/?$/, '');
-        const [rawHost, rawPort] = hostPort.split(':');
-        const windowHost = typeof window !== 'undefined' ? window.location.hostname : '';
-        const isLocalhost = (host) => /^(localhost|127\.0\.0\.1)$/i.test(host);
-        const host = isLocalhost(rawHost) && windowHost && !isLocalhost(windowHost) ? windowHost : rawHost;
-        const port = rawPort ? `:${rawPort}` : '';
-        return `${protocol}//${host}${port}/ws/chat/${sessionId}`;
+        return `${protocol}//${hostPort}/ws/chat/${sessionId}`;
     }
-    // Default: same network – use same host as API (localhost:8000 when app is localhost:5173)
+
+    // Default fallback (local development)
     const protocol = typeof window !== 'undefined' && window.location?.protocol === 'https:' ? 'wss:' : 'ws:';
     const host = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
     const port = 8000;

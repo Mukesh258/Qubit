@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Shield, Lock, AlertCircle, CheckCircle, ArrowLeft } from 'lucide-react';
-import axios from 'axios';
 
 // Components
 import QuantumStatusPanel from '../components/QuantumStatusPanel';
@@ -11,6 +10,7 @@ import ReportForm from '../components/ReportForm';
 // Utils
 import { secureReportFlow } from '../utils/quantumCrypto';
 import { useSecurity } from '../SecurityContext';
+import { reportAPI } from '../services/api';
 
 const AnonymousReport = () => {
     const navigate = useNavigate();
@@ -76,11 +76,8 @@ const AnonymousReport = () => {
             );
 
             // 4. Submit to Backend
-            // Include token if available to link report to user history
-            const token = localStorage.getItem('access_token');
-            const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
-
-            const response = await axios.post('http://localhost:8000/api/report/anonymous', {
+            // Use reportAPI service which handles baseURL and auth headers
+            const response = await reportAPI.submitAnonymous({
                 encrypted_payload: finalPayload,
                 qkd_protocol: "BB84",
                 qber: encryptionResult.qber,
@@ -97,7 +94,7 @@ const AnonymousReport = () => {
                         attachments: attachmentsWithData
                     }
                 }
-            }, config);
+            });
 
             setReportResult(response.data);
             setStatus('success');
